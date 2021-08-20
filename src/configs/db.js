@@ -3,11 +3,8 @@ require('dotenv').config();
 module.exports = {
   use_env_variable: 'DATABASE_URL',
   dialect: process.env.DIALECT,
-  dialectOptions: {
-    ssl: {
-      require: 'true',
-      rejectUnauthorized: 'false',
-    },
+  ssl: {
+    rejectUnauthorized: false,
   },
   host: process.env.HOST,
   username: process.env.DB_USERNAME,
