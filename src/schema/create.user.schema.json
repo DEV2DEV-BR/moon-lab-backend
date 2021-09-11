@@ -4,17 +4,18 @@
     "type": "object",
     "properties": {
         "name": {
-            "type":"string"
+            "type": "string"
         },
-        "user_name": {
-            "type":"string"
-        } ,
         "email": {
-            "type":"string"
-        },    
+            "type": "string"
+        },
         "password": {
-            "type":"string"
+            "type": "string"
         }
     },
-    "required": ["name","user_name","email","password"]
+    "required": [
+        "name",
+        "email",
+        "password"
+    ]
 }

@@ -3,15 +3,14 @@
     "title": "AuthSchema",
     "type": "object",
     "properties": {
-        "user_name": {
-            "type":"string"
-        } ,
         "email": {
-            "type":"string"
-        },    
+            "type": "string"
+        },
         "password": {
-            "type":"string"
+            "type": "string"
         }
     },
-    "required": ["password"]
+    "required": [
+        "password"
+    ]
 }
