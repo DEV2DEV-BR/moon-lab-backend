@@ -4,19 +4,10 @@ const { encrypt } = require('../../utils/crypt');
 
 class AuthenticationController {
   async authenticate(req, res) {
-    const { email, user_name, password } = req.body;
-
-    const whereClause = {};
-    if (email) {
-      whereClause.email = email;
-    } else if (user_name) {
-      whereClause.user_name = user_name;
-    } else {
-      return res.status(401).json({ error: 'We need a e-mail or username' });
-    }
+    const { email, password } = req.body;
 
     const user = await Users.findOne({
-      where: whereClause,
+      where: { email },
     });
 
     if (!user) {
@@ -27,7 +18,7 @@ class AuthenticationController {
       return res.status(401).json({ error: 'Password does not match!' });
     }
 
-    const { id, user_name: userName } = user;
+    const { id } = user;
 
     const { iv, content } = encrypt(id);
 
@@ -37,7 +28,7 @@ class AuthenticationController {
       expiresIn: process.env.EXPIRE_IN,
     });
 
-    return res.status(200).json({ user: { id, user_name: userName }, token });
+    return res.status(200).json({ user: { id }, token });
   }
 }
 
