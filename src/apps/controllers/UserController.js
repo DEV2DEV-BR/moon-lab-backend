@@ -98,6 +98,7 @@ class UserControler {
 
   async userProfile(req, res) {
     const user = await Users.findOne({
+      attributes: ['id', 'name', 'email', 'avatar', 'bio', 'gender'],
       where: {
         id: req.userId,
       },
@@ -107,15 +108,7 @@ class UserControler {
       return res.status(400).json({ message: 'User not exists!' });
     }
 
-    const {
-      id, name, email, avatar, bio, gender,
-    } = user;
-
-    return res.status(200).json({
-      user: {
-        id, name, email, avatar, bio, gender,
-      },
-    });
+    return res.status(200).json({ user });
   }
 }
 module.exports = new UserControler();
