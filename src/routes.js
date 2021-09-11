@@ -8,6 +8,8 @@ const authSchema = require('./schema/auth.schema.json');
 
 const UserControler = require('./apps/controllers/UserController');
 const userSchema = require('./schema/create.user.schema.json');
+const categorySchema = require('./schema/create.category.schema.json');
+const CategoriesController = require('./apps/controllers/CategoriesController');
 
 const routes = new Router();
 
@@ -23,5 +25,10 @@ routes.use(AuthenticationMiddleware);
 routes.put('/user', UserControler.update);
 routes.delete('/user', UserControler.delete);
 routes.get('/user', UserControler.userProfile);
+
+routes.post('/category', schemaValidator(categorySchema), CategoriesController.create);
+routes.put('/category/:id', CategoriesController.update);
+routes.delete('/category/:id', CategoriesController.delete);
+routes.get('/category', CategoriesController.get);
 
 module.exports = routes;

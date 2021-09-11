@@ -2,7 +2,7 @@ require('dotenv').config();
 
 module.exports = {
   dialect: process.env.DIALECT,
-  dialectOptions: {
+  dialectOptions: process.env.production && {
     ssl: {
       require: false,
       rejectUnauthorized: false,
