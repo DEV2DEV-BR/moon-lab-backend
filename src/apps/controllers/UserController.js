@@ -18,7 +18,7 @@ class UserControler {
       return res.status(400).json({ message: 'Failed to create a user!' });
     }
 
-    return res.send({ message: 'User created!' });
+    return res.status(201).send({ message: 'User created!' });
   }
 
   async update(req, res) {
@@ -108,12 +108,12 @@ class UserControler {
     }
 
     const {
-      id, name, user_name, email, avatar, bio, gender,
+      id, name, email, avatar, bio, gender,
     } = user;
 
     return res.status(200).json({
       user: {
-        id, name, user_name, email, avatar, bio, gender,
+        id, name, email, avatar, bio, gender,
       },
     });
   }
