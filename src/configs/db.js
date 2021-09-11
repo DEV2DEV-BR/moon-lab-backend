@@ -2,18 +2,18 @@ require('dotenv').config();
 
 module.exports = {
   use_env_variable: 'DATABASE_URL',
-  dialect: process.env.DIALECT,
+  dialect: 'postgres',
   dialectOptions: {
     ssl: {
       require: false,
       rejectUnauthorized: false,
     },
   },
-  host: process.env.HOST,
-  username: process.env.DB_USERNAME,
-  password: process.env.PASSWORD,
-  database: process.env.DATABASE,
-  port: process.env.DB_PORT,
+  host: "database-1.cjh4myzj7z1c.us-east-2.rds.amazonaws.com",
+  username: "postgres",
+  password: "DeV2Dev1721690134",
+  database: moon,
+  port: 5432,
   define: {
     timestamps: true,
     underscored: true,
