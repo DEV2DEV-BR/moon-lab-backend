@@ -20,13 +20,9 @@ services:
       - 3333:3333
     volumes: 
       - .:/usr/app
+    env_file: ./.env
     environment:
-      - DIALECT: postgres
-      - HOST: database-1.cjh4myzj7z1c.us-east-2.rds.amazonaws.com
-      - DB_USERNAME: postgres
-      - PASSWORD: DeV2Dev1721690134
-      - DATABASE: moon
-      - DB_PORT: 5432
+      - NODE_ENV=production
     # links: 
     #   - dbdev2dev
     # depends_on: 
