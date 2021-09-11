@@ -12,7 +12,7 @@ module.exports = {
   host: "database-1.cjh4myzj7z1c.us-east-2.rds.amazonaws.com",
   username: "postgres",
   password: "DeV2Dev1721690134",
-  database: moon,
+  database: "moon",
   port: 5432,
   define: {
     timestamps: true,
