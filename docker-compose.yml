@@ -1,16 +1,16 @@
 version: "3.7"
 
 services: 
-  # dbdev2dev:
-  #   container_name: dbdev2dev
-  #   image: mysql
-  #   ports: 
-  #     - 3306:3306
-  #   restart: always
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: postgres
-  #   volumes:
-  #   - database-volume:/var/lib/mysql
+  dbdev2dev:
+    container_name: dbdev2dev
+    image: postgres
+    ports: 
+      - 5432:5432
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+    - database-volume:/var/lib/postgresql
             
   app:
     build: .
@@ -20,14 +20,11 @@ services:
       - 3333:3333
     volumes: 
       - .:/usr/app
-    env_file: ./.env
-    environment:
-      - NODE_ENV=production
-    # links: 
-    #   - dbdev2dev
-    # depends_on: 
-    #   - dbdev2dev
+    links: 
+      - dbdev2dev
+    depends_on: 
+      - dbdev2dev
 
 
-# volumes:
-#   database-volume:
+volumes:
+  database-volume:
