@@ -10,10 +10,11 @@ services:
     environment:
       POSTGRES_PASSWORD: postgres
     volumes:
-    - database-volume:/var/lib/postgresql
+    - database-volume:/var/lib/postgresql'
             
   app:
     build: .
+    command: npm run dev
     container_name: api
     restart: always
     ports: 
