@@ -21,12 +21,12 @@ services:
     volumes: 
       - .:/usr/app
     environment:
-      DIALECT: postgres
-      HOST: database-1.cjh4myzj7z1c.us-east-2.rds.amazonaws.com
-      DB_USERNAME: postgres
-      PASSWORD: DeV2Dev1721690134
-      DATABASE: moon
-      DB_PORT: 5432
+      - DIALECT: postgres
+      - HOST: database-1.cjh4myzj7z1c.us-east-2.rds.amazonaws.com
+      - DB_USERNAME: postgres
+      - PASSWORD: DeV2Dev1721690134
+      - DATABASE: moon
+      - DB_PORT: 5432
     # links: 
     #   - dbdev2dev
     # depends_on: 
