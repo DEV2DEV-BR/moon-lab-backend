@@ -2,80 +2,120 @@ const Categories = require('../models/Categories');
 
 class CategoriesController {
   async create(req, res) {
-    const verifyCategory = await Categories.findOne({
-      where: {
-        name: req.body.name
-      },
-    });
+    try {
+      const verifyCategory = await Categories.findOne({
+        where: {
+          name: req.body.name
+        },
+      });
 
-    if (verifyCategory) {
-      return res.status(400).json({ message: 'Category already exits!' });
+      if (verifyCategory) {
+        return res.status(400).json({ message: 'Category already exits!' });
+      }
+
+      const category = await Categories.create(req.body);
+
+      if (!category) {
+        return res.status(400).json({ message: 'Failed to create a category!' });
+      }
+
+      return res.status(201).send({ message: 'Category created!' });
+    } catch (error) {
+      return res.status(400).json({ message: 'Something is wrong!' });
     }
-
-    const category = await Categories.create(req.body);
-
-    if (!category) {
-      return res.status(400).json({ message: 'Failed to create a category!' });
-    }
-
-    return res.status(201).send({ message: 'Category created!' });
   }
 
   async update(req, res) {
-    const {
-      name, description, image_url
-    } = req.body;
+    try {
+      const {
+        name, description, image_url
+      } = req.body;
 
-    const { id } = req.params;
+      const { id } = req.params;
 
-    const category = await Categories.findOne({
-      where: { id },
-    });
+      const category = await Categories.findOne({
+        where: { id },
+      });
 
-    if (!category) {
-      return res.status(400).json({ message: 'Category not exits!' });
-    }
+      if (!category) {
+        return res.status(400).json({ message: 'Category not exits!' });
+      }
 
-    await Categories.update(
-      {
-        name: name || category.name,
-        description: description || category.description,
-        image_url: image_url || category.image_url
-      },
-      {
-        where: {
-          id: id,
+      await Categories.update(
+        {
+          name: name || category.name,
+          description: description || category.description,
+          image_url: image_url || category.image_url
         },
-      },
-    );
+        {
+          where: {
+            id: id,
+          },
+        },
+      );
 
-    return res.status(200).json({ message: 'Category updated!' });
+      return res.status(200).json({ message: 'Category updated!' });
+    } catch (error) {
+      return res.status(400).json({ error: 'Something is wrong!' });
+    }
   }
 
   async delete(req, res) {
-    const { id } = req.params;
+    try {
+      const { id } = req.params;
 
-    const category = await Categories.findOne({
-      where: { id },
-    });
+      const category = await Categories.findOne({
+        where: { id },
+      });
 
-    if (!category) {
-      return res.status(400).json({ message: 'Category not exists!' });
+      if (!category) {
+        return res.status(400).json({ message: 'Category not exists!' });
+      }
+
+      await Categories.destroy({
+        where: { id },
+      });
+
+      return res.status(200).json({ message: 'Category deleted!' });
+    } catch (error) {
+      return res.status(400).json({ error: 'Something is wrong!' })
     }
-
-    await Categories.destroy({
-      where: { id },
-    });
-
-    return res.status(200).json({ message: 'Category deleted!' });
   }
 
   async get(req, res) {
-    const categories = await Categories.findAll({
-      attributes: ['id', 'name', 'description', 'image_url']
-    });
+    try {
 
-    return res.status(200).json(categories);
+      const { id } = req.params;
+
+      const category = await Categories.findOne(
+        {
+          attributes: ['id', 'name', 'description', 'image_url'],
+          where: { id }
+        }
+      );
+
+      if (!category) {
+        return res.status(404).json({ message: 'Category not found!' });
+      }
+
+      return res.status(200).json(category);
+    } catch (error) {
+      return res.status(400).json({ error: 'Something is wrong!' })
+    }
+  }
+
+  async all(req, res) {
+
+    try {
+
+      const categories = await Categories.findAll({
+        attributes: ['id', 'name', 'description', 'image_url']
+      });
+
+      return res.status(200).json(categories);
+    } catch (error) {
+      return res.status(400).json({ error: 'Something is wrong!' })
+    }
   }
 }
 module.exports = new CategoriesController();
