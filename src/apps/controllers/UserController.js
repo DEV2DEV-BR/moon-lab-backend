@@ -96,7 +96,7 @@ class UserControler {
     return res.status(200).json({ message: 'User deleted!' });
   }
 
-  async userProfile(req, res) {
+  async get(req, res) {
     const user = await Users.findOne({
       attributes: ['id', 'name', 'email', 'avatar', 'bio', 'gender'],
       where: {
