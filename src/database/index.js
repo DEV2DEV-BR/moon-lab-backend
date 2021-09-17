@@ -5,7 +5,7 @@ const Categories = require('../apps/models/Categories');
 const Courses = require('../apps/models/Courses');
 const Modules = require('../apps/models/Modules');
 
-const models = [Users, Categories];
+const models = [Users, Categories, Courses];
 const databaseConfig = require('../configs/db');
 
 class Database {
