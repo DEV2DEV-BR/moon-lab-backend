@@ -19,7 +19,7 @@ class Courses extends Model {
   }
 
   static associate(models) {
-    this.hasOne(models.Categories, { foreignKey: 'category_id', as: 'category' });
+    this.belongsTo(models.Categories, { foreignKey: 'category_id', as: 'category' });
   }
 }
 
