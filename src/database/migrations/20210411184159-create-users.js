@@ -16,6 +16,11 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
+      user_type: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: 'student'
+      },
       avatar: {
         type: Sequelize.STRING,
       },
