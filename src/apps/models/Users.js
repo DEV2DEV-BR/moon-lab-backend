@@ -10,6 +10,7 @@ class Users extends Model {
         email: Sequelize.STRING,
         avatar: Sequelize.STRING,
         bio: Sequelize.STRING,
+        user_type: Sequelize.STRING,
         gender: Sequelize.STRING,
         password_hash: Sequelize.STRING,
         password: Sequelize.VIRTUAL,
